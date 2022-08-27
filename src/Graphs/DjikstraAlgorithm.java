@@ -13,7 +13,7 @@ import java.util.PriorityQueue;
  * TC: O((N+E)*logN). Going through N nodes and E edges and log N for priority queue
  * SC: O(N). Distance array and priortyQueue
  */
-public class ShortestPathWeightedUndirectedGraph {
+public class DjikstraAlgorithm {
     static class Node implements Comparator<Node> {
         int value,weight;
         Node(){};

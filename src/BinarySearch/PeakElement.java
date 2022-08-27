@@ -1,4 +1,4 @@
-package DivideNConquer;
+package BinarySearch;
 
 import java.util.Scanner;
 

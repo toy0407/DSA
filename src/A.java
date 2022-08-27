@@ -4,8 +4,6 @@ import java.lang.*;
 import java.util.*;
 import static java.lang.Math.*;
 
-
-
 public class A {
 
     private static void solve() throws IOException {

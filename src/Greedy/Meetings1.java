@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 
-public class NMeetingInRoom {
+public class Meetings1 {
 
     static class MeetingTimes{
         int s,f,count;

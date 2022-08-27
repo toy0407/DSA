@@ -3,6 +3,31 @@ package Arrays;
 import java.util.*;
 
 public class LongestConsecutiveSubsequence {
+
+    //Time Complexity: O(N)
+    public int longestConsecutive(int[] nums) {
+        int n=nums.length;
+        if(n==0 || n==1) return n;
+        Set<Integer> h=new HashSet<>();
+        for(Integer num:nums){
+            h.add(num);
+        }
+        int max=0,c=0;
+        for(Integer num: nums){
+            if(!h.contains(num - 1)){
+                int curr=num;
+                c=1;
+                while(h.contains(num+1)){
+                    c++;
+                    num++;
+                }
+            }
+            max=Math.max(c,max);
+        }
+        return max;
+    }
+
+    //Time Complexity: O(NlogN)
     static int findLongestConseqSubseq(int arr[], int n) {
         // add your code here
         SortedSet<Integer> h = new TreeSet<>();

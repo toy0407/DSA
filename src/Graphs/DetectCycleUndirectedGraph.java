@@ -25,7 +25,7 @@ public class DetectCycleUndirectedGraph {
         }
         return false;
     }
-
+    //BFS
     public boolean bfs(ArrayList<ArrayList<Integer>> adj, int i, boolean[] vis) {
         Queue<Node> q = new LinkedList<>();
         q.add(new Node(i, -1));
@@ -47,4 +47,5 @@ public class DetectCycleUndirectedGraph {
         return false;
 
     }
+    //TODO: DFS
 }

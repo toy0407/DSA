@@ -23,17 +23,17 @@ public class nQueen {
     }
 
     private static boolean getQueenPosition(int[][] ar, int n,int x) {
-        if (x==n) {
-            return true;
-        }
-        for (int i=0;i<n;i++){
-            if (isSafe(ar,n,x,i)){
-                ar[x][i]=1;
-                if (getQueenPosition(ar,n,x+1)) return true;
-                ar[x][i]=0;
+            if (x==n) {
+                return true;
             }
-        }
-        return false;
+            for (int i=0;i<n;i++){
+                if (isSafe(ar,n,x,i)){
+                    ar[x][i]=1;
+                    if (getQueenPosition(ar,n,x+1)) return true;
+                    ar[x][i]=0;
+                }
+            }
+            return false;
     }
 
     private static boolean isSafe(int[][] ar, int n,int x,int y) {
