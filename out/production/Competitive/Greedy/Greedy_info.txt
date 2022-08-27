@@ -1,0 +1,3 @@
+N meetings in 1 room -> Sort end time. Take the first one and check the rest accordingly.
+1 person can attend all meetings -> Sort the start time. Check if the end time of current meeting is lesser than the start time of the next meeting.
+No. of rooms required for given meeting intervals -> Sort the starting and ending times seperately and check for overlapping intervals. Return the max count of the overlapping intervals.
