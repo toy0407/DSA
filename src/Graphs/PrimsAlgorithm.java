@@ -29,7 +29,7 @@ public class PrimsAlgorithm {
      * TC: O(NlogN). N iterations and logN for priority queue
      * SC: O(N). Three arrays and priority queue
      */
-    static void primsAlgrithm(int V, ArrayList<ArrayList<Node>> adj) {
+    static void primsAlgorithm(int V, ArrayList<ArrayList<Node>> adj) {
         int[] dist=new int[V];
         boolean[] mst=new boolean[V];
         int[] parent=new int[V];
@@ -42,7 +42,13 @@ public class PrimsAlgorithm {
         PriorityQueue<Node> pq=new PriorityQueue<>(V, new Node());
         pq.add(new Node(0,dist[0]));
         for(int i=0;i<V-1;i++){
-            int u=pq.poll().val;
+            int mini = (int)1e9, u = 0;
+            for(int v = 0;v<V;v++) {
+                if(mst[v] == false && dist[v] < mini) {
+                    mini = dist[v];
+                    u = v;
+                }
+            }
             mst[u]=true;
 
             for(Node it:adj.get(u)){
@@ -89,7 +95,7 @@ public class PrimsAlgorithm {
 
         adj.get(2).add(new Node(4, 7));
         adj.get(4).add(new Node(2, 7));
-        primsAlgrithm(n,adj);
+        primsAlgorithm(n,adj);
 
     }
 }

@@ -9,6 +9,7 @@ import java.util.Stack;
 public class ShortestPathWeightedDirectedAcyclicGraph {
     class Pair {
         int val, weight;
+
         Pair(int val, int dist) {
             this.val = val;
             this.weight = dist;
@@ -27,13 +28,12 @@ public class ShortestPathWeightedDirectedAcyclicGraph {
         dist[src] = 0;
         while (!st.isEmpty()) {
             int node = st.pop();
-            if (dist[node] == (int) 1e9) {
-                for (Pair it : adj.get(node)) {
-                    if (dist[node] + it.weight < dist[it.val]) {
-                        dist[it.val] = dist[node] + it.weight;
-                    }
+            for (Pair it : adj.get(node)) {
+                if (dist[node] + it.weight < dist[it.val]) {
+                    dist[it.val] = dist[node] + it.weight;
                 }
             }
+
         }
         for (Integer i : dist) {
             System.out.println(i);

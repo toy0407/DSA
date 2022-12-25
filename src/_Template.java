@@ -1,8 +1,8 @@
 import java.io.*;
 import java.lang.*;
 import java.util.*;
-import static java.lang.Math.*;
 
+import static java.lang.Math.*;
 
 
 public class _Template {
@@ -59,20 +59,15 @@ public class _Template {
         return fact % M;
     }
 
-    static int lower_bound(int[] array, int key) {
-
-        int index = Arrays.binarySearch(array, key);
-        if (index < 0) {
-            return Math.abs(index) - 1;
-        } else {
-            while (index > 0) {
-                if (array[index - 1] == key)
-                    index--;
-                else
-                    return index;
-            }
-            return index;
+    static int lowerbound(int[] ar, int el){
+        int l = 0, r = ar.length-1;
+        while(l<=r){
+            int mid = (l+r)/2;
+            if(ar[mid]==el) return mid;
+            else if (ar[mid]>el) r = mid-1;
+            else l = mid+1;
         }
+        return l;
     }
 
     static long modMult(long a, long b) {
@@ -133,6 +128,49 @@ public class _Template {
         @Override
         public int compareTo(Object o) {
             return 0;
+        }
+    }
+
+    static class SegmentTree {
+        int[] seg;//Seg array should be of size 4n
+
+        SegmentTree(int n){
+            seg=new int[4*n];
+        }
+
+        void build(int index, int l, int r, int[] ar) {
+            if (l == r) {
+                seg[index] = ar[l];
+                return;
+            }
+            int mid = l + (r - l) / 2;
+            build(2 * index + 1, l, mid, ar);
+            build(2 * index + 2, mid, r, ar);
+            seg[index] = Math.min(seg[2 * index + 1], seg[2 * index + 2]);
+        }
+
+        int query(int index, int l, int r, int ql, int qr) {
+            // No Overlap: (ql qr l r) || (l r ql qr)
+            if (qr < l || r < ql) return (int) 1e9;
+            // Complete Overlap: (ql l r qr)
+            if (l <= ql && qr <= r) return seg[index];
+
+            int mid = l + (r - l) / 2;
+            int left = query(2*index+1,l,mid,ql,qr);
+            int right = query(2*index+2,mid,r,ql,qr);
+            return Math.min(left,right);
+        }
+
+        void update(int index, int l,int r,int updateIndex, int val){
+            if(l==r){
+                seg[index]= val;
+                return;
+            }
+
+            int mid=l+(r-l)/2;
+            if(updateIndex<=mid) update(2*index+1,l,mid,updateIndex,val);
+            else update(2*index+2,mid,r,updateIndex,val);
+            seg[index]=Math.min(seg[2*index+1],seg[2*index+2]);
         }
     }
 

@@ -16,8 +16,6 @@ import java.util.Comparator;
 public class KruskalAlgorithm {
     static class Node {
         int weight, u, v;
-
-
         public Node(int u, int v, int weight) {
             this.weight = weight;
             this.u = u;

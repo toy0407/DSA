@@ -1,13 +1,57 @@
-import javax.swing.tree.TreeNode;
 import java.io.*;
 import java.lang.*;
 import java.util.*;
-import static java.lang.Math.*;
 
 public class A {
-
+    static class Fabric{
+        String c;
+        int d;
+        int id;
+        Fabric(String c, int d,int id){
+            this.c=c;
+            this.d=d;
+            this.id=id;
+        }
+    }
     private static void solve() throws IOException {
         //Solve here
+        int n = sc.nextInt();
+        ArrayList<Fabric> ar = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            String s= sc.next();
+            int d= sc.nextInt();
+            int id = sc.nextInt();
+            ar.add(new Fabric(s,d,id));
+        }
+        ArrayList<Fabric> arc = new ArrayList<>(ar);
+        ArrayList<Fabric> ard = new ArrayList<>(ar);
+        ArrayList<Fabric> arid = new ArrayList<>(ar);
+
+        Collections.sort(arc, new Comparator<Fabric>() {
+            @Override
+            public int compare(Fabric o1, Fabric o2) {
+                return o1.c.compareTo(o2.c);
+            }
+        });
+        Collections.sort(ard, new Comparator<Fabric>() {
+            @Override
+            public int compare(Fabric o1, Fabric o2) {
+                return o1.d-o2.d;
+            }
+        });
+        Collections.sort(arid, new Comparator<Fabric>() {
+            @Override
+            public int compare(Fabric o1, Fabric o2) {
+                return o1.id-o2.id;
+            }
+        });
+        int c=0;
+        for (int i = 0; i < n; i++) {
+            if(arc.get(i).equals(ard.get(i)) && ard.get(i).equals(arid.get(i))) c++;
+        }
+
+        System.out.println(c);
+
         
     }
 

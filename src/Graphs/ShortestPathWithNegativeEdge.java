@@ -13,34 +13,34 @@ import java.util.*;
  * SC: O(N). Distance Array
  */
 public class ShortestPathWithNegativeEdge {
-    class Node {
-        int weight, u, v;
-        public Node(int u, int v, int weight) {
-            this.weight = weight;
-            this.u = u;
-            this.v = v;
-        }
-    }
 
-    void shortestPath(int src, ArrayList<Node> adj, int V) {
+
+    static int[] bellman_ford(int V, ArrayList<ArrayList<Integer>> edges, int src) {
         int[] dist = new int[V];
-        Arrays.fill(dist, (int) 1e9);
+        Arrays.fill(dist,(int)1e8);
         dist[src] = 0;
-        //We iterate N-1 times since it is the max possible relaxation that can happen if the graph doesn't have negative cycle.
-        for (int i = 0; i < V - 1; i++) {
-            for (Node it : adj) {
-                if (dist[it.u] + it.weight < dist[it.v]) {
-                    dist[it.v] = dist[it.u] + it.weight;
+        //Relax the edges V-1 times as it is the max number of times an edge can be relaxed if it doesn't contain a negative cycle.
+        for(int j = 0;j<V-1;j++){
+            for(int i=0;i<edges.size();i++){
+                int u = edges.get(i).get(0);
+                int v = edges.get(i).get(1);
+                int wt = edges.get(i).get(2);
+                if(dist[u]+wt<dist[v]){ // This step is called edge relaxation.
+                    dist[v] = dist[u]+wt;
                 }
             }
         }
-        boolean hasNegativeCycle = false;
-        for (Node it : adj) {
-            if (dist[it.u] + it.weight < dist[it.v]) {
-                hasNegativeCycle = true;
-                break;
+
+        //Check for negative cycle by relaxing the edges for the Vth time. If relaxation is possible, there's a negative cycle.
+        for(int i=0;i<edges.size();i++){
+            int u = edges.get(i).get(0);
+            int v = edges.get(i).get(1);
+            int wt = edges.get(i).get(2);
+            if(dist[u]+wt<dist[v]){
+                return new int[]{-1};
             }
         }
-        if (!hasNegativeCycle) for (Integer i : dist) System.out.println(i);
+
+        return dist;
     }
 }

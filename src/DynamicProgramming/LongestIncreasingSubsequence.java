@@ -96,26 +96,21 @@ public class LongestIncreasingSubsequence {
                 ans.add(ar[i]);
             }
             else{
-//                int replaceIndex= lower_bound(ans,ar[i]);
-//                ans.set(replaceIndex,ar[i]);
+                int replaceIndex= lower_bound(ans,ar[i]);
+                ans.set(replaceIndex,ar[i]);
             }
         }
         return ans.size();
     }
-    static int lower_bound(int[] array, int key) {
-
-        int index = Arrays.binarySearch(array, key);
-        if (index < 0) {
-            return Math.abs(index) - 1;
-        } else {
-            while (index > 0) {
-                if (array[index - 1] == key)
-                    index--;
-                else
-                    return index;
-            }
-            return index;
+    static int lower_bound(ArrayList<Integer> ar, int el){
+        int l = 0, r = ar.size()-1;
+        while(l<=r){
+            int mid = (l+r)/2;
+            if(ar.get(mid)==el) return mid;
+            else if (ar.get(mid)>el) r = mid-1;
+            else l = mid+1;
         }
+        return l;
     }
 
 

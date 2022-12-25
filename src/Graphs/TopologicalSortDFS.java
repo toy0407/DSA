@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class TopologicalSortDFS {
+    // Topological Sort only applicable for Directed Acyclic graph
     // DFS traversal of the graph with storing each traversed elements in a stack gives a topo sort of the graph in reverse order.
     // Pop the elements of the stack into a array to obtain the required topo sort.
     boolean[] vis;
